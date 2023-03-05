@@ -141,13 +141,13 @@ module.exports = function(RED) {
 
 		request.get(mediaUrl, function(err, res, data){
 			if (err) {
-				return res.send(RED._("instagram.error.request-error", {err: err}));
+				return node.send(RED._("instagram.error.request-error", {err: err}));
 			}
 			if (data.error) {
-				return res.send(RED._("instagram.error.request-error", {error: data.error}));
+				return node.send(RED._("instagram.error.request-error", {error: data.error}));
 			}
 			if(res.statusCode !== 200) {
-				return res.send(RED._("instagram.error.unexpected-statuscode", {statusCode: res.statusCode, data: data}));
+				return node.send(RED._("instagram.error.unexpected-statuscode", {statusCode: res.statusCode, data: data}));
 			}
 
 			var media = JSON.parse(data).data;
