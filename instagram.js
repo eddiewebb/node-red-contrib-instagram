@@ -206,8 +206,8 @@ module.exports = function(RED) {
 			}
 		});
 
-		res.redirect(url);
 		RED.nodes.addCredentials(node_id, credentials);
+		res.redirect(url);
 	});
 
 	// IG Authorization Window will call this url on successful permissioning
