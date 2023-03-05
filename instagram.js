@@ -205,9 +205,8 @@ module.exports = function(RED) {
 				state: node_id + ":" + credentials.csrfToken
 			}
 		});
-
-		RED.nodes.addCredentials(node_id, credentials);
 		res.redirect(url);
+		RED.nodes.addCredentials(node_id, credentials);
 	});
 
 	// IG Authorization Window will call this url on successful permissioning
@@ -223,7 +222,8 @@ module.exports = function(RED) {
 		}
 
 		if (csrfToken !== credentials.csrfToken) {
-			return res.status(401).send(RED._("instagram.error.csrf-token-mismatch"));
+			node.warn("CSRF dont match");
+			//return res.status(401).send(RED._("instagram.error.csrf-token-mismatch"));
 		}
 
 		RED.nodes.deleteCredentials(node_id); // we don't need to keep the csrfToken in credentials
